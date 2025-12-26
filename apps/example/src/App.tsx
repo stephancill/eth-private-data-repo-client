@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createAuthFetch } from "siwe-auth-fetch";
+import { authFetch } from "siwe-auth-fetch";
 import { useAccount, useConnect, useDisconnect, useSignMessage } from "wagmi";
 import "./index.css";
 
@@ -33,13 +33,12 @@ function App() {
 			let response: Response;
 
 			if (withAuth && address) {
-				const authFetch = createAuthFetch({
+				response = await authFetch(url, {
 					address,
 					signMessage: signMessageAsync,
 					token: token ?? undefined,
 					onToken: (newToken) => setToken(newToken),
 				});
-				response = await authFetch(url);
 			} else {
 				response = await fetch(url);
 			}

@@ -7,13 +7,16 @@ import { config } from "./wagmi";
 import "./index.css";
 
 const queryClient = new QueryClient();
+const rootElement = document.getElementById("root");
 
-createRoot(document.getElementById("root")!).render(
-	<StrictMode>
-		<WagmiProvider config={config}>
-			<QueryClientProvider client={queryClient}>
-				<App />
-			</QueryClientProvider>
-		</WagmiProvider>
-	</StrictMode>,
-);
+if (rootElement) {
+	createRoot(rootElement).render(
+		<StrictMode>
+			<WagmiProvider config={config}>
+				<QueryClientProvider client={queryClient}>
+					<App />
+				</QueryClientProvider>
+			</WagmiProvider>
+		</StrictMode>,
+	);
+}
