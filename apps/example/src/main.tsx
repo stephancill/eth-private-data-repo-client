@@ -1,21 +1,19 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import React from "react";
-import ReactDOM from "react-dom/client";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { WagmiProvider } from "wagmi";
-
-import App from "./App.tsx";
-import { config } from "./wagmi.ts";
-
+import App from "./App";
+import { config } from "./wagmi";
 import "./index.css";
 
 const queryClient = new QueryClient();
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-	<React.StrictMode>
+createRoot(document.getElementById("root")!).render(
+	<StrictMode>
 		<WagmiProvider config={config}>
 			<QueryClientProvider client={queryClient}>
 				<App />
 			</QueryClientProvider>
 		</WagmiProvider>
-	</React.StrictMode>,
+	</StrictMode>,
 );
